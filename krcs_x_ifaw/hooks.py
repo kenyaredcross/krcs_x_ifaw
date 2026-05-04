@@ -100,6 +100,10 @@ fixtures = [
 # before_install = "krcs_x_ifaw.install.before_install"
 # after_install = "krcs_x_ifaw.install.after_install"
 
+# Migrate
+# ------------
+after_migrate = "krcs_x_ifaw.install.after_migrate"
+
 # Uninstallation
 # ------------
 
