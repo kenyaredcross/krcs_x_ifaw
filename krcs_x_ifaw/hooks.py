@@ -10,6 +10,18 @@ app_license = "mit"
 
 # required_apps = []
 
+# Website Route Rules
+# ------------------
+website_route_rules = [
+	{"from_route": "/krcs-x-ifaw/<path:app_path>", "to_route": "krcs-x-ifaw"},
+]
+
+# Fixtures
+# --------
+fixtures = [
+	{"dt": "Role", "filters": [["name", "in", ["KRCS x IFAW"]]]},
+]
+
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
