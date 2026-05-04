@@ -2115,3 +2115,128 @@ body::before {
   color: var(--ochre);
   font-weight: 600;
 }
+/* ── MOBILE NAVIGATION ── */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.mobile-menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--sand);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .topbar {
+    padding: 0.9rem 1rem;
+  }
+
+  .topbar-title {
+    font-size: 0.95rem;
+  }
+
+  .topbar-right {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--deep);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom: 2px solid var(--ochre);
+  }
+
+  .topbar-right.mobile-open {
+    max-height: 400px;
+  }
+
+  .topbar-right .user-chip {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(232,213,176,0.1);
+    font-size: 0.75rem;
+  }
+
+  .topbar-right .btn-export {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(232,213,176,0.1);
+  }
+
+  /* Mobile dashboard adjustments */
+  .dashboard-view {
+    padding: 1rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .overview-simple {
+    margin-left: 0;
+    padding: 1.5rem 1rem;
+  }
+
+  .overview-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .overview-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .overview-simple-content {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-hero {
+    padding: 2rem 1rem;
+  }
+
+  .overview-hero-title {
+    font-size: 2rem;
+  }
+
+  .overview-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-title {
+    font-size: 0.85rem;
+  }
+
+  .user-chip span {
+    font-size: 0.7rem;
+  }
+
+  .sub-card {
+    padding: 1rem;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
