@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "autoname": "format:{session}-{user}",
+ "creation": "2026-08-03 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "session",
+  "user",
+  "organisation",
+  "joined_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "session",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Session",
+   "options": "OH Session",
+   "reqd": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organisation",
+   "fieldtype": "Data",
+   "label": "Organisation"
+  },
+  {
+   "fieldname": "joined_on",
+   "fieldtype": "Datetime",
+   "label": "Joined On",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-03 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Krcs X Ifaw",
+ "name": "OH Session Participant",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "KRCS x IFAW",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
+}
