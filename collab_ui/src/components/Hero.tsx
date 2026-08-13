@@ -1,27 +1,27 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
-import type { UserInfo } from '../types';
 
 interface HeroProps {
-  onEnter: (userInfo: UserInfo) => void;
+  onEnter: (org: string) => void;
+  frappeUser?: { name: string; email: string };
 }
 
-export const Hero = ({ onEnter }: HeroProps) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+const ORGS = [
+  'KRCS – DRR',
+  'KRCS – MEAL',
+  'KRCS – HNSS',
+  'KRCS – DMOPs',
+  'KRCS – RPCs',
+  'IFAW',
+  'Other',
+];
+
+export const Hero = ({ onEnter, frappeUser }: HeroProps) => {
   const [org, setOrg] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    if (!email.trim()) return;
     if (!org) return;
-
-    onEnter({
-      name: name.trim(),
-      email: email.trim(),
-      org
-    });
+    onEnter(org);
   };
 
   return (
@@ -45,45 +45,31 @@ export const Hero = ({ onEnter }: HeroProps) => {
         </p>
 
         <form className="session-panel" onSubmit={handleSubmit}>
-          <div className="session-label">Begin your session</div>
+          <div className="session-label">Join the shared workspace</div>
 
-          <div className="input-group">
-            <label>Your Full Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Dr. Amina Wanjiru"
-              autoComplete="off"
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Your Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. amina.wanjiru@krcs.org"
-              autoComplete="off"
-            />
-          </div>
+          {frappeUser && (
+            <div style={{
+              padding: '0.75rem 1rem',
+              background: 'rgba(28,40,32,0.06)',
+              borderRadius: '6px',
+              marginBottom: '1rem',
+              fontSize: '0.88rem',
+              color: 'var(--deep)',
+            }}>
+              Signed in as <strong>{frappeUser.name}</strong>
+              <span style={{ opacity: 0.6, marginLeft: '0.4rem' }}>({frappeUser.email})</span>
+            </div>
+          )}
 
           <div className="input-group">
             <label>Organisation</label>
             <select value={org} onChange={(e) => setOrg(e.target.value)}>
-              <option value="">Select...</option>
-              <option value="KRCS – DRR">KRCS – DRR</option>
-              <option value="KRCS – MEAL">KRCS – MEAL</option>
-              <option value="KRCS – HNSS">KRCS – HNSS</option>
-              <option value="KRCS – DMOPs">KRCS – DMOPs</option>
-              <option value="KRCS – RPCs">KRCS – RPCs</option>
-              <option value="IFAW">IFAW</option>
-              <option value="Other">Other</option>
+              <option value="">Select…</option>
+              {ORGS.map(o => <option key={o} value={o}>{o}</option>)}
             </select>
           </div>
 
-          <button type="submit" className="btn-enter">
+          <button type="submit" className="btn-enter" disabled={!org}>
             Enter Workspace →
           </button>
         </form>

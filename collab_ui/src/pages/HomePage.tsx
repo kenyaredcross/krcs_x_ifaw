@@ -1,10 +1,10 @@
 import { Hero } from '../components/Hero';
-import type { UserInfo } from '../types';
 
 interface HomePageProps {
-  onEnter: (userInfo: UserInfo) => void;
+  onEnter: (org: string) => void;
+  frappeUser?: { name: string; email: string };
 }
 
-export const HomePage = ({ onEnter }: HomePageProps) => {
-  return <Hero onEnter={onEnter} />;
+export const HomePage = ({ onEnter, frappeUser }: HomePageProps) => {
+  return <Hero onEnter={onEnter} frappeUser={frappeUser} />;
 };

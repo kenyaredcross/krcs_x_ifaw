@@ -1,15 +1,14 @@
-import type { Category, SessionData } from '../types';
-import { loadData } from '../utils/storage';
+import type { Category, SessionData, StorageData } from '../types';
 
 interface SummaryPanelProps {
   categories: Category[];
   sessionCode: string;
+  sessionData: StorageData;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const SummaryPanel = ({ categories, sessionCode, isOpen, onClose }: SummaryPanelProps) => {
-  const data = loadData(sessionCode);
+export const SummaryPanel = ({ categories, sessionCode, sessionData: data, isOpen, onClose }: SummaryPanelProps) => {
 
   const downloadJSON = () => {
     const out: SessionData = {

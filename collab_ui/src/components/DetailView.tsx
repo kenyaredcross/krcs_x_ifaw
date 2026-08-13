@@ -1,19 +1,26 @@
-import type { Category, EntryData } from '../types';
+import type { Category, EntryData, StorageData } from '../types';
 import { SubComponentEnhanced } from './SubComponentEnhanced';
-import { getEntry, saveEntry } from '../utils/storage';
+
+const EMPTY_ENTRY: EntryData = {
+  drivers: '',
+  interventions: '',
+  driversList: [],
+  interventionsList: [],
+  levels: [],
+  other: '',
+  by: [],
+};
 
 interface DetailViewProps {
   category: Category;
   sessionCode: string;
+  sessionData: StorageData;
   currentUser: string;
   onBack: () => void;
+  onSaveEntry: (catId: string, subIndex: number, entry: EntryData) => Promise<void>;
 }
 
-export const DetailView = ({ category, sessionCode, currentUser, onBack }: DetailViewProps) => {
-  const handleSaveEntry = (subIndex: number, entry: EntryData) => {
-    saveEntry(sessionCode, category.id, subIndex, entry, currentUser);
-  };
-
+export const DetailView = ({ category, sessionCode: _sessionCode, sessionData, currentUser: _currentUser, onBack, onSaveEntry }: DetailViewProps) => {
   return (
     <div className="detail-view active">
       <div className="detail-header" data-icon={category.icon}>
@@ -25,7 +32,7 @@ export const DetailView = ({ category, sessionCode, currentUser, onBack }: Detai
       </div>
       <div className="subcomponents">
         {category.subs.map((sub, index) => {
-          const entry = getEntry(sessionCode, category.id, index);
+          const entry = sessionData[category.id]?.[index] ?? { ...EMPTY_ENTRY };
           const isOther = sub.includes('Other');
 
           return (
@@ -34,7 +41,7 @@ export const DetailView = ({ category, sessionCode, currentUser, onBack }: Detai
               subTitle={sub}
               subIndex={index}
               entry={entry}
-              onSave={(updatedEntry) => handleSaveEntry(index, updatedEntry)}
+              onSave={(updatedEntry) => onSaveEntry(category.id, index, updatedEntry)}
               isOther={isOther}
             />
           );

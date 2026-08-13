@@ -1,15 +1,14 @@
-import type { Category } from '../types';
+import type { Category, StorageData } from '../types';
 import { CategoryCard } from './CategoryCard';
-import { loadData } from '../utils/storage';
 
 interface CategoryGridProps {
   categories: Category[];
   sessionCode: string;
+  sessionData: StorageData;
   onCategoryClick: (index: number) => void;
 }
 
-export const CategoryGrid = ({ categories, sessionCode, onCategoryClick }: CategoryGridProps) => {
-  const data = loadData(sessionCode);
+export const CategoryGrid = ({ categories, sessionCode: _sessionCode, sessionData: data, onCategoryClick }: CategoryGridProps) => {
 
   const getStats = () => {
     let totalEntries = 0;

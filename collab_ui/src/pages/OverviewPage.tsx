@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Topbar } from '../components/Topbar';
 import { CATEGORIES } from '../constants/categories';
-import { loadData } from '../utils/storage';
-import type { UserInfo, EntryData } from '../types';
+import type { UserInfo, EntryData, StorageData } from '../types';
 
 interface OverviewPageProps {
   userInfo: UserInfo;
   sessionCode: string;
+  sessionData: StorageData;
+  participantCount: number;
 }
 
 interface ContributionData {
@@ -47,12 +48,12 @@ const getOrgPillColors = (org: string): { bg: string; color: string } => {
   return { bg: '#EAF3DE', color: '#2D5016' };
 };
 
-export const OverviewPage = ({ userInfo, sessionCode }: OverviewPageProps) => {
+export const OverviewPage = ({ userInfo, sessionCode: _sessionCode, sessionData, participantCount: _participantCount }: OverviewPageProps) => {
   const [contributions, setContributions] = useState<ContributionData[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   useEffect(() => {
-    const data = loadData(sessionCode);
+    const data = sessionData;
     const allContributions: ContributionData[] = [];
 
     CATEGORIES.forEach((category) => {
@@ -79,7 +80,7 @@ export const OverviewPage = ({ userInfo, sessionCode }: OverviewPageProps) => {
     });
 
     setContributions(allContributions);
-  }, [sessionCode]);
+  }, [sessionData]);
 
   const filteredContributions = selectedCategory === 'all'
     ? contributions

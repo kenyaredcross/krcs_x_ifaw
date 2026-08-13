@@ -1,11 +1,13 @@
 import { Topbar } from '../components/Topbar';
 import { SummaryPanel } from '../components/SummaryPanel';
 import { CATEGORIES } from '../constants/categories';
-import type { UserInfo } from '../types';
+import type { UserInfo, StorageData } from '../types';
 
 interface DashboardPageProps {
   userInfo: UserInfo;
   sessionCode: string;
+  sessionData: StorageData;
+  participantCount: number;
   showSummary: boolean;
   onOpenSummary: () => void;
   onCloseSummary: () => void;
@@ -15,6 +17,8 @@ interface DashboardPageProps {
 export const DashboardPage = ({
   userInfo,
   sessionCode,
+  sessionData,
+  participantCount: _participantCount,
   showSummary,
   onOpenSummary,
   onCloseSummary,
@@ -71,6 +75,7 @@ export const DashboardPage = ({
       <SummaryPanel
         categories={CATEGORIES}
         sessionCode={sessionCode}
+        sessionData={sessionData}
         isOpen={showSummary}
         onClose={onCloseSummary}
       />
